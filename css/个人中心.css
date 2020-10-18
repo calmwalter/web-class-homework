@@ -1,0 +1,128 @@
+*{
+    padding: 0;
+    margin: 0 auto;
+}
+body{
+    background-color: #f2f2f2;
+}
+.page{
+    margin: 0 auto;
+    width: 1500px;
+}
+.navigation{
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(225, 225, 225);
+    box-shadow: 0px 0px 20px #cacaca;
+    float: left;
+    width: 150px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+.itemtitle {
+    font-weight: bold;
+    margin: 10px;
+}
+hr{
+    margin: 10px auto;
+}
+.detail0{
+    float: left;
+    width: 750px;
+}
+.detail1{
+    float: left;
+    width: 400px;
+}
+
+h3{
+    margin-left: 10px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+.wallet{
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 700px;
+    text-align: center;
+}
+td{
+    width: 100px;
+}
+.order{
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 700px;
+    text-align: center;
+}
+
+.follow{
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    right: 0;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 300px;
+    text-align: center;
+}
+
+.lifeservice{
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    margin: 20px;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 300px;
+    text-align: center;
+}
+.buywhat{
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    margin: 20px;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 700px;
+    text-align: center;
+}
+
+.frequent{
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 300px;
+    text-align: center;
+}
+.qa{
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #cacaca;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 2px;
+    width: 300px;
+    text-align: center;
+}
