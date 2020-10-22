@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>questionnaire</title>
+    <link rel="stylesheet" href="./questionnaire.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id=card class="card">
+        <div class=header>
+            <div id="selection" v-if="type==='selection'">
+                <p class=title>{{selection.question}}</p>
+                <div class=content>
+                    <input id=selection1 type="radio" value="man" v-model='selection.picked' v-on:change="updateDisabled">
+                    <label for="selection1">{{selection.s1}}</label>
+                    <input id=selection2 type="radio" value="woman" v-model='selection.picked' v-on:change="updateDisabled">
+                    <label for="selection2">{{selection.s2}}</label>
+                    <input id=selection3 type="radio" value="secret" v-model='selection.picked' v-on:change="updateDisabled">
+                    <label for="selection3">{{selection.s3}}</label>
+                </div>
+            </div>
+            <div id="chkbox" v-if="type==='chkbox'">
+                <p class=title>{{chkbox.question}}</p>
+                <div class=content>
+                    <input type="checkbox" id="checkbox1" value="book" v-model='chkbox.picked'  v-on:change="updateDisabled">
+                    <label for="checkbox1">{{chkbox.s1}}</label>
+                    <br>
+                    <input type="checkbox" id="checkbox2" value="swim" v-model='chkbox.picked' v-on:change="updateDisabled">
+                    <label for="checkbox2">{{chkbox.s2}}</label>
+                    <br>
+                    <input type="checkbox" id="checkbox3" value="run" v-model='chkbox.picked' v-on:change="updateDisabled">
+                    <label for="checkbox3">{{chkbox.s3}}</label>
+                    <br>
+                    <input type="checkbox" id="checkbox4" value="movie" v-model='chkbox.picked' v-on:change="updateDisabled">
+                    <label for="checkbox4">{{chkbox.s4}}</label>
+                    <br>
+                    <input type="checkbox" id="checkbox5" value="music" v-model='chkbox.picked' v-on:change="updateDisabled">
+                    <label for="checkbox5">{{chkbox.s5}}</label>
+                </div>
+            </div>
+            <div id="txtedit" v-if="type==='txtedit'">
+                <p class=title>{{txtedit.question}}</p>
+                <textarea class=content id="txtedit" cols="30" rows="10" v-model='txtedit.content'>
+                    
+                </textarea>
+            </div>
+        </div>
+        <div class=footer>
+            <custom-button class=custom-button v-if="type==='txtedit'" text="提交" color="#2196f3"></custom-button>
+            <custom-button class=custom-button v-on:clicked="stepNext" v-if="type!='txtedit'" v-bind:isdisabled="isdisabled" color="#2196f3" text="下一步"></custom-button>
+            <custom-button class=custom-button v-on:clicked="stepBack" v-if="type!='selection'" text="上一步"></custom-button>
+            <custom-button class=custom-button v-on:clicked="clear" text="重置" ></custom-button>
+        </div>
+
+    </div>
+    <script>
+        Vue.component('custom-button',{
+            props:['color','isdisabled','text'],
+            template:`<button v-on:click="clickEvent" :disabled="isdisabled" :style="{background:color}">{{text}}</button>`,
+            methods:{
+                clickEvent:function(event){
+                    this.$emit('clicked');
+                }
+            },
+        });
+        var card = new Vue({
+            el:'#card',
+            data:{
+                type:'selection',
+                selection:{
+                    question:'请问您的性别是：',
+                    s1:'男',
+                    s2:'女',
+                    s3:'保密',
+                    picked:''
+                },
+                chkbox:{
+                    question:'请问您的兴趣爱好：',
+                    s1:'看书',
+                    s2:'游泳',
+                    s3:'跑步',
+                    s4:'看电影',
+                    s5:'听音乐',
+                    picked:[]
+                },
+                txtedit:{
+                    question:'请介绍一下自己：',
+                    content:''
+                },
+                isdisabled:true
+            },
+            methods:{
+                stepBack:function (event) {
+                    if(this.type==='chkbox'){
+                        this.type='selection';
+                    }else if(this.type==='txtedit'){
+                        this.type='chkbox';
+                    }
+                },
+                stepNext:function (event) {
+                    if(this.type==='selection'){
+                        this.type='chkbox';
+                    }else if(this.type==='chkbox'){
+                        this.type='txtedit';
+                    }
+                    this.updateDisabled();
+                },
+                clear:function (event) {
+                    if(this.type==='selection'){
+                        this.selection.picked='';
+                    }
+                    else if(this.type==='chkbox'){
+                        this.chkbox.picked=[];
+                    }else if(this.type==='txtedit'){
+                        this.txtedit.content='';
+                    }
+                    this.isdisabled=true;
+                },
+                updateDisabled:function(event){
+                    if(this.type==='selection'){
+                        // this.isdisabled=false;
+                        console.log(this.selection.picked);
+                        if(this.selection.picked===''){
+                            this.isdisabled=true;
+                        }else{
+                            this.isdisabled=false;
+                        }
+                    }
+                    if(this.type==='chkbox'){
+                        console.log(this.chkbox.picked.length);
+                        if(this.chkbox.picked.length<2){
+                            this.isdisabled=true;
+                        }else{
+                            this.isdisabled=false;
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
