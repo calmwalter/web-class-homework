@@ -54,10 +54,10 @@
                     <li>
                         <input type="checkbox" class="check" v-model:checked="item.checked" v-on:click="calculateAll(index)"><img v-bind:src="item.img" alt="">
                         <span class="s1">{{item.name}}</span><span class="money">¥</span>
-                        <span class="price">{{item.money}}</span><input type="button" value="-" class="sub" >
-                        <span class="count">{{item.count}}</span><input type="button" value="+" class="add">
+                        <span class="price">{{item.price}}</span><input type="button" value="-" class="sub" v-on:click="minusCommodity(index)">
+                        <span class="count">{{item.count}}</span><input type="button" value="+" class="add" v-on:click="plusCommodity(index)">
                         <span class="money1">¥</span><span class="total">{{item.total}}</span>
-                        <span class="del" v-on:click=>删除</span>
+                        <span class="del" v-on:click="deleteItem(index)">删除</span>
                     </li>
                 </ul>
             </div>
@@ -74,8 +74,8 @@
                 <div class="last">
                     <a href="./青竹登录.html">确认结算</a>
                 </div>
-                <input type="checkbox" class="checkAll"><span class="s1">全选</span>
-                <span class="ss1">删除</span><span class="ss2">清除下架商品</span>
+                <!-- <input type="checkbox" class="checkAll"><span class="s1">全选</span>
+                <span class="ss1">删除</span><span class="ss2">清除下架商品</span> -->
                 <div class="foot">
                     已选<span class="totalCount">{{count}}</span>件
                     合计(不含运费) : <span class="totalPrice">¥{{total}}</span>元<br>
@@ -201,7 +201,23 @@
                     this.count=cnt;
                 },
                 setItemChecked:function(item){
+                },
+                plusCommodity:function(index){
+                    this.items[index].count+=1;
+                    this.items[index].total=this.items[index].price*this.items[index].count;
+                    this.calculateAll();
+                },
+                minusCommodity:function(index){
+                    if(this.items[index].count>0){
+                        this.items[index].count-=1;
+                        this.items[index].total=this.items[index].price*this.items[index].count;
+                        this.calculateAll();
+                    }
 
+                },
+                deleteItem:function(index){
+                    this.items.splice(index,1);
+                    this.calculateAll();
                 }
             }
         });
